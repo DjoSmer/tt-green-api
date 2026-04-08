@@ -11,8 +11,8 @@ export interface IStore {
 
 export interface IStoreContext {
     _store: IStore,
-    _onStoreUpdate: (cb: ListenerCallback<[IStore]>) => () => void,
     _updateStore: (newStore: Partial<IStore>) => void,
+    onStoreUpdate: (cb: ListenerCallback<[IStore]>) => () => void,
     getStore: () => IStore,
     setApiUrl: (value: string) => void,
     setIdInstance: (value: string) => void,
@@ -33,7 +33,7 @@ export const appStore: IStoreContext = {
         message: '',
         lastResponseData: null
     },
-    _onStoreUpdate: (cb) => {
+    onStoreUpdate: (cb) => {
         return storeListener.subscribe(cb)
     },
     _updateStore: (newStore) => {
